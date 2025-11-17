@@ -7,8 +7,10 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = os.environ.get('DEBUG')
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DEBUG = os.environ.get('DEBUG')
+DeBUG = True
+# DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL='postgresql://wellbikedb_ek8s_user:z3htPkJC8ssWc7HFTN5WbUYhEbmOpuc9@dpg-d4dpgq24d50c73bhnba0-a.frankfurt-postgres.render.com/wellbikedb_ek8s'
 
 ALLOWED_HOSTS = ['*']
 
