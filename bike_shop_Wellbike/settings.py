@@ -8,7 +8,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # DEBUG = os.environ.get('DEBUG')
-DeBUG = True
+DEBUG = True
 # DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASE_URL='postgresql://wellbikedb_ek8s_user:z3htPkJC8ssWc7HFTN5WbUYhEbmOpuc9@dpg-d4dpgq24d50c73bhnba0-a.frankfurt-postgres.render.com/wellbikedb_ek8s'
 
