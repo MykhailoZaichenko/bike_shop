@@ -73,23 +73,11 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 #     }
 # }
 
-# Todo for railway
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 'mRBFp13xxf5SIRgsGZWJ',
-#         'HOST': 'containers-us-west-83.railway.app',
-#         'PORT': '6380',
-#     }
-# }
-
 
 
 if DATABASE_URL:
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True )
     }
 else:
     DATABASES = {
