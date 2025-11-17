@@ -1,9 +1,10 @@
 from pathlib import Path
 from dotenv import load_dotenv
+import environ
 import os
 from django.utils.translation import gettext_lazy as _
 
-load_dotenv()
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -69,12 +70,12 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Todo for railway
 # DATABASES = {
@@ -88,13 +89,19 @@ DATABASES = {
 #     }
 # }
 
-# import dj_database_url
-#
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://wellbikedb_user:dX5ThxDmbO9Diu8doPgPjAEnSaQdT3T8@dpg-ci1e3cvdvk4kgooavb00-a.frankfurt-postgres.render.com/wellbikedb')
-#
-# }
+import dj_database_url
 
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # CACHES = {
 #     'default': {
