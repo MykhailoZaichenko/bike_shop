@@ -12,7 +12,7 @@ DEBUG = True
 # DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASE_URL='postgresql://wellbikedb_ek8s_user:z3htPkJC8ssWc7HFTN5WbUYhEbmOpuc9@dpg-d4dpgq24d50c73bhnba0-a.frankfurt-postgres.render.com/wellbikedb_ek8s'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'wellbike.onrender.com',]
 
 # Application definition
 
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -165,4 +165,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_USE_SSL = False
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
