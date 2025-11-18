@@ -1,4 +1,5 @@
 from pathlib import Path
+from dotenv import load_dotenv
 import environ
 import os
 from django.utils.translation import gettext_lazy as _
@@ -7,12 +8,19 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# DEBUG = os.environ.get('DEBUG')
-DEBUG = True
-# DATABASE_URL = os.environ.get('DATABASE_URL')
-DATABASE_URL='postgresql://wellbikedb_ek8s_user:z3htPkJC8ssWc7HFTN5WbUYhEbmOpuc9@dpg-d4dpgq24d50c73bhnba0-a.frankfurt-postgres.render.com/wellbikedb_ek8s'
+# SECURITY WARNING: keep the secret key used in production secret!
 
-ALLOWED_HOSTS = ['*', 'wellbike.onrender.com',]
+# SECRET_KEY = 'django-insecure-3%y3laftm62q0zaj+s7#p-xqq9(&#q+)s8)p-&#&bz*0$!xu$0'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG')
+# DEBUG = True
+
+# DATABASE_URL='postgresql://wellbikedb_ek8s_user:z3htPkJC8ssWc7HFTN5WbUYhEbmOpuc9@dpg-d4dpgq24d50c73bhnba0-a.frankfurt-postgres.render.com/wellbikedb_ek8s'
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -73,11 +81,13 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 #     }
 # }
 
-
-
 if DATABASE_URL:
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True )
+        'default': dj_database_url.parse(
+            DATABASE_URL, 
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
 else:
     DATABASES = {
@@ -130,8 +140,6 @@ CSRF_TRUSTED_ORIGINS = ['https://wellbike.up.railway.app']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-WHITENOISE_MANIFEST_STRICT = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
